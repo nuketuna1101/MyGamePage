@@ -1,0 +1,19 @@
+* {
+    font-family: "Jaro", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+.title-section {
+    width: 900px;
+    margin: auto;
+}
+
+.title-body {
+    text-align: center;
+}
+
+.bar-filter-options {
+    width: 500px;
+}

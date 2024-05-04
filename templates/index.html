@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+            crossorigin="anonymous">
+		<!-- JQuery -->
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            crossorigin="anonymous"></script>
+        <!-- GoogleFont: Jaro -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&family=Stylish&family=Ubuntu+Sans+Mono:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+        <!-- title -->
+        <title>NUKETUNA FAC | Main Page</title>
+        <!-- css -->
+        <link href="static/css/main.css" rel="stylesheet">
+        <!-- js -->
+        <script type="text/javascript" src="static/js/myJs.js"></script>
+    </head>
+
+    <body>
+        <!-- Title -->
+        <section class="title-section">
+            <div class="title-body">
+                <h1 class="title">
+                    MY GAME LIST
+                </h1>
+                <h2 class="subtitle">
+                    ranking with likes
+                </h2>
+            </div>
+        </section>
+
+        <!-- Filter Options -->
+        <div class="bar-filter-options">
+            <div class="btn-filter-options">
+                <a href="#" class="btn btn-primary" id="filter-alphabet" onclick="changeFilter('alphabet')">Sort by Alphabet</a>
+                <a href="#" class="btn btn-primary" id="filter-likes" onclick="changeFilter('likes')">Sort by Likes</a>
+                <a href="#" class="btn btn-primary" id="filter-bookmark" onclick="changeFilter('bookmark')">Show my Bookmarks</a>
+            </div>
+        </div>
+
+        <!-- dynamic part -->
+        <div class="itembox">
+            <!-- javascript 가 이 사이에 HTML element 를 생성해서 삽입합니다. -->
+        </div>
+    </body>
+</html>
