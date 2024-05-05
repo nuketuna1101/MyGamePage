@@ -1,5 +1,4 @@
 // 정렬 관련
-
 const Filter = {
     SORT_BY_ALPHABET: "alphabet",
     SORT_BY_LIKES: "likes",
@@ -10,25 +9,18 @@ let filterMode = Filter.alphabet;
 
 // index.html 로딩 이후 자동 호출
 $(document).ready(function () {
-    // $("#cards-box").html("");
-    // showArticles();
+    showItems();
 });
 
 
 function showItems(){
-    // 1. id="movie-box" 로 된 태그의 내부 html 태그를 모두 삭제합니다.
-    // 2. 휴지통을 보고 있는지 여부에 따라 호출할 API 를 선택합니다.
-    //    휴지통이 아닐 경우 GET /api/list
-    //    휴지통일 경우 GET /api/list/trash
-
-
     $.ajax({
-        type: "GET",
-        url: "//",
-        data: {},
-        success: function() {
+        // type: "GET",
+        // url: "//",
+        // data: {},
+        // success: function() {
 
-        },
+        // },
     })
 
 }
@@ -59,7 +51,6 @@ function bookmarkItem(flag){
 function changeFilter(targetMode){
     // 필터 옵션 클릭 시 해당 필터 옵션대로 호출
     // if (filterMode == targetMode)   return;
-
     if (filterMode == targetMode){
         console.log("log:: same as current mode");
         return;

@@ -50,20 +50,10 @@ def like_items():
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
+    for item in db.list_collections:
+        print(item)
 
 
-# Chrome WebDriver 시작
-# driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-# driver.get("https://store.steampowered.com/charts/")
-# 검색 입력 상자를 찾고 검색어 입력
-# search_box = driver.find_element(By.NAME, "q")
-# search_query = "Python programming"
-# search_box.send_keys(search_query)
-# search_box.send_keys(Keys.RETURN)
-# 페이지 로딩을 위해 잠시 대기
-# time.sleep(3)
-# # 검색 결과 가져오기
-# search_results = driver.find_elements(By.CSS_SELECTOR, "_33Kj2Qx_9z4VyvlKulpay8")
 
 
 # def get_first_image_from_google(query):
