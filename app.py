@@ -48,10 +48,11 @@ def home():
 # DB 내의 게임 목록 GET으로 가져오기
 @app.route('/items', methods=['GET'])
 def get_items():
-    # 요청한 sort방식 가져오기 .. 없다면 기본값으로 좋아요 순
-    filterMode = request.args.get('filterMode', 'likes')
+    # 요청한 sort방식 가져오기 .. 없다면 기본값으로 알파벳 순
+    filterMode = request.args.get('filterMode', 'alphabet')
+    print("+------------------ My filter mode : " + filterMode)
     if filterMode == 'alphabet':
-        items = list(db.items.find().sort("alphabet", 1))
+        items = list(db.items.find().sort("title", 1))
     elif filterMode == 'likes':
         items = list(db.items.find().sort("likes", 1))
     else:

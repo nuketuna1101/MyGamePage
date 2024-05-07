@@ -14,6 +14,8 @@ $(document).ready(function () {
 
 
 function showItems(){
+    $('.itembox').empty()
+
     $.ajax({
         type: "GET",
         url: "/items",
@@ -24,7 +26,7 @@ function showItems(){
                 return
             }
             /* to do */
-            console.log("+-- showItems success");
+            console.log("+-- showItems success w. mode: " + filterMode);
             addItems(response['item_list']);
         },
     })
