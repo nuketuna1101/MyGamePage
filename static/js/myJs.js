@@ -15,15 +15,62 @@ $(document).ready(function () {
 
 function showItems(){
     $.ajax({
-        // type: "GET",
-        // url: "//",
-        // data: {},
-        // success: function() {
-
-        // },
+        type: "GET",
+        url: "/items",
+        data: {'filterMode': filterMode},
+        success: function(response) {
+            if (response['result'] != 'success') {
+                alert('failed to load data. w. filter by' + filterMode)
+                return
+            }
+            /* to do */
+            console.log("+-- showItems success");
+            addItems(response['item_list']);
+        },
     })
-
 }
+
+
+
+
+function addItems(items) {
+    console.log("+-- addItems called");
+    // for 문을 활용하여 movies 배열의 요소를 차례대로 조회합니다.
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+
+        let title = item['title'];
+        let img = item['img'];
+        let likes = item['likes'];
+
+        let cardContentHtml = `
+            <img src="${img}" class="item-img"/>
+            <span class="item-title">${title}</span>
+            <span class="icon"><i class="fas fa-thumbs-up"></i></span><span class="movie-likes">Likes: ${likes}</span>
+        `
+
+        let cardFooterHtml = `
+            <a href="#">
+            Recommend!
+            </a>
+            <a href="#" onclick="searchOnGoogle('${title}');return false;">
+            Search on Google
+            </a>
+        `
+
+        // 4. #movie-box에 생성된 HTML 을 붙입니다.
+        $('.itembox').append(`
+            <div class="card">
+                ${cardContentHtml}
+                ${cardFooterHtml}
+            </div>
+        `)
+    }
+}
+
+
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // 주의: 아래 like movie 는 임의의 영화에 좋아요가 표시됩니다.
 // 이 구현을 선택한 무비에 좋아요를 넣는 것으로 수정하셔야 됩니다. (함수 매개변수 및 함수 구현 모두)
@@ -31,7 +78,7 @@ function showItems(){
 function likeMovie() {
     $.ajax({
         type: "POST",
-        url: "/api/like",
+        url: "/likes",
         data: {},
         success: function (response) {
             if (response['result'] == 'success') {
@@ -68,4 +115,19 @@ function displayFilter(){
     document.getElementById("filter-alphabet").classList.remove("active")
     document.getElementById("filter-likes").classList.remove("active")
     document.getElementById("filter-bookmark").classList.remove("active")
+}
+
+function searchOnGoogle(inputString){
+    $.ajax({
+        type: "GET",
+        url: "/api/search",
+        data: {'title': inputString},
+        success: function (response) {
+            if (response['result'] != 'success') {
+                alert('failed to search ' + inputString)
+                return
+            }
+            console.log("+-- searchOnGoogle success");
+        }
+    });
 }

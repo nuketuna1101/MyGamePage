@@ -14,31 +14,31 @@ def init_db():
     init_data = [
         {
             'title': 'Hearthstone',
-            # 'img': img_url,
+            'img': 'static/img/Hearthstone.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
             'title': 'League of Legends',
-            # 'img': img_url,
+            'img': 'static/img/LeagueofLegends.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
             'title': 'Battleground',
-            # 'img': img_url,
+            'img': 'static/img/Battleground.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
             'title': 'Lies of P',
-            # 'img': img_url,
+            'img': 'static/img/LiesofP.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
             'title': 'Dave the Diver',
-            # 'img': img_url,
+            'img': 'static/img/DavetheDiver.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
