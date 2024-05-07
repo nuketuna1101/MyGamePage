@@ -55,6 +55,8 @@ def get_items():
         items = list(db.items.find().sort("title", 1))
     elif filterMode == 'likes':
         items = list(db.items.find().sort("likes", 1))
+    elif filterMode == 'bookmark':
+        items = list(db.items.find({'bookmark': True}))
     else:
         return jsonify({'result': 'failure'})
     
