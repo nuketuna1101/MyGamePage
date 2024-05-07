@@ -31,8 +31,6 @@ function showItems(){
 }
 
 
-
-
 function addItems(items) {
     console.log("+-- addItems called");
     // for 문을 활용하여 movies 배열의 요소를 차례대로 조회합니다.
@@ -43,28 +41,22 @@ function addItems(items) {
         let img = item['img'];
         let likes = item['likes'];
 
-        let cardContentHtml = `
-            <img src="${img}" class="item-img"/>
-            <span class="item-title">${title}</span>
-            <span class="icon"><i class="fas fa-thumbs-up"></i></span><span class="movie-likes">Likes: ${likes}</span>
-        `
+        let itemHtml = `
+            <div class="item-instance">
+                <span class="item-title">${title}</span>
+                <br>
+                <span class="item-likes">Likes: ${likes}</span>
+                <br>
+                <img src="${img}" class="item-img"/>
 
-        let cardFooterHtml = `
-            <a href="#">
-            Recommend!
-            </a>
-            <a href="#" onclick="searchOnGoogle('${title}');return false;">
-            Search on Google
-            </a>
-        `
-
-        // 4. #movie-box에 생성된 HTML 을 붙입니다.
-        $('.itembox').append(`
-            <div class="card">
-                ${cardContentHtml}
-                ${cardFooterHtml}
+                <div class="container-footerbtns">
+                    <button href="#" class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Recommend!</button>
+                    <button href="#" class="btn-footerbtn" onclick="searchOnGoogle('${title}');return false;">Search on Google</button>
+                </div>
             </div>
-        `)
+        `;
+
+        $('.itembox').append(`${itemHtml}`);
     }
 }
 

@@ -14,11 +14,60 @@
     text-align: center;
 }
 
+
+/* filter options 부분 */
+/* ---------------------------------------------------------------------------------- */
+
+
 .bar-filter-options {
-    width: 500px;
+    display: flex;
+    justify-content: center; /* 수평 가운데 정렬 */
+}
+
+.btn-filterbtn {    
+    background-color: lightseagreen;
+    width: 25vw;
+    padding: 10px 10px;
+}
+
+/* itemHtml 부분 */
+/* ---------------------------------------------------------------------------------- */
+.item-instance{
+    border: 2px solid black;
+    border-radius: 10px; 
+    background-color: lightgray;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    padding: 20px; 
+}
+
+.item-title {
+    color: darkkhaki;
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+.item-likes {
+    margin-left: 80vw;
 }
 
 .item-img {
     width: 400px;
     height: 225px;
 }
+
+
+.container-footerbtns{
+    display: flex;
+    margin-left: 50vw;
+}
+
+.btn-footerbtn{
+    flex-grow: 1;
+    border-radius: 25px;
+    margin-right: 20px;
+    margin-left: 20px;
+    padding: 10px 10px;
+}
+/* ---------------------------------------------------------------------------------- */
