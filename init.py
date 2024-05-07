@@ -13,30 +13,35 @@ def init_db():
     db.items.drop()
     init_data = [
         {
+            'id': 'g01',
             'title': 'Hearthstone',
             'img': 'static/img/Hearthstone.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
+            'id': 'g02',
             'title': 'League of Legends',
             'img': 'static/img/LeagueofLegends.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
+            'id': 'g03',
             'title': 'Battleground',
             'img': 'static/img/Battleground.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
+            'id': 'g04',
             'title': 'Lies of P',
             'img': 'static/img/LiesofP.jpg',
             'likes': random.randrange(10, 50),
             'bookmark': False,
         },
         {
+            'id': 'g05',
             'title': 'Dave the Diver',
             'img': 'static/img/DavetheDiver.jpg',
             'likes': random.randrange(10, 50),

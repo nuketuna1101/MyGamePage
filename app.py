@@ -50,23 +50,34 @@ def home():
 def get_items():
     # 요청한 sort방식 가져오기 .. 없다면 기본값으로 알파벳 순
     filterMode = request.args.get('filterMode', 'alphabet')
-    print("+------------------ My filter mode : " + filterMode)
+
     if filterMode == 'alphabet':
         items = list(db.items.find().sort("title", 1))
     elif filterMode == 'likes':
         items = list(db.items.find().sort("likes", 1))
     else:
         return jsonify({'result': 'failure'})
+    
     return jsonify({'result': 'success', 'item_list': items})
 
-# 좋아요 버튼으로 좋아요 개수 올리기.
+# 좋아요 버튼으로 좋아요 개수 올리기. TODO!!!!!!!!!!!!
 @app.route('/likes', methods=['POST'])
 def like_items():
     return jsonify({'result': 'success'})
 
-@app.route("/api/search", methods=['GET'])
+@app.route('/bookmark', methods=['POST'])
+def toggle_Bookmark():
+    targetID = request.form.get('targetID', 'wrong')
+    target = db.items.find_one({'id':targetID}, {'bookmark':1})
+    toggledValue = not target['bookmark']
+    db.items.update_one({'id':targetID}, {'$set': {'bookmark' : toggledValue}})    
+    isBookmarked = db.items.find_one({'id':targetID}, {'bookmark':1})['bookmark']
+    return jsonify({'result': 'success', 'isBookmarked': isBookmarked})
+
+
+@app.route("/search", methods=['GET'])
 def search_on_google():
-    query = request.args.get('title', '')
+    query = request.args.get('title', 'wrong')
     # 비동기 실행보장
     search_thread = threading.Thread(target=search_on_google_async, args=(query,))
     search_thread.start()

@@ -43,12 +43,24 @@
 
 .item-title {
     color: darkkhaki;
-    font-size: 24px;
+    font-size: 36px;
     font-weight: bold;
     margin-left: 15px;
+    padding-right: 100px;
 }
 
+.item-bookmark {
+    margin-right: 15px;
+}
+
+
 .item-likes {
+    margin-left: 80vw;
+}
+
+
+
+.right-origin {
     margin-left: 80vw;
 }
 
@@ -57,17 +69,21 @@
     height: 225px;
 }
 
-
-.container-footerbtns{
+.container-footerbtns {
     display: flex;
     margin-left: 50vw;
 }
 
-.btn-footerbtn{
+.btn-footerbtn {
     flex-grow: 1;
     border-radius: 25px;
     margin-right: 20px;
     margin-left: 20px;
     padding: 10px 10px;
+}
+
+.btn-100x100 {
+    width: 100px;
+    height: 100px;
 }
 /* ---------------------------------------------------------------------------------- */

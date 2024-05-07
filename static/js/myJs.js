@@ -25,7 +25,6 @@ function showItems(){
                 alert('failed to load data. w. filter by' + filterMode)
                 return
             }
-            /* to do */
             console.log("+-- showItems success w. mode: " + filterMode);
             addItems(response['item_list']);
         },
@@ -34,59 +33,94 @@ function showItems(){
 
 
 function addItems(items) {
-    console.log("+-- addItems called");
+    console.log("+-- addItems called");    
     // for 문을 활용하여 movies 배열의 요소를 차례대로 조회합니다.
     for (let i = 0; i < items.length; i++) {
         let item = items[i];
 
+        let id = item['id'];
         let title = item['title'];
         let img = item['img'];
         let likes = item['likes'];
+        let bookmark = item['bookmark'];
+
+        let bookmarkHtml = (bookmark) ?
+        `
+        <img src="static/img/svg_star_yellow.svg" class="item-bookmark btn-100x100" onclick="toggleBookmark('${id}');" alt="Bookmark">    
+        `
+        :
+        `
+        <img src="static/img/svg_star_black.svg" class="item-bookmark btn-100x100" onclick="toggleBookmark('${id}');" alt="Bookmark">    
+        `
+        ;
 
         let itemHtml = `
             <div class="item-instance">
-                <span class="item-title">${title}</span>
-                <br>
+                <div>
+                    <span class="item-title">${title}</span>
+                    <span class="item-bookmark">bookmark</span> 
+                    ${bookmarkHtml}
+                </div>
+
                 <span class="item-likes">Likes: ${likes}</span>
-                <br>
-                <img src="${img}" class="item-img"/>
+                <img src="${img}" class="item-img"/>                      
 
                 <div class="container-footerbtns">
-                    <button href="#" class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Recommend!</button>
-                    <button href="#" class="btn-footerbtn" onclick="searchOnGoogle('${title}');return false;">Search on Google</button>
+                    <button class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Go to Top</button>
+                    <button class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Recommend!</button>
+                    <button class="btn-footerbtn" onclick="searchOnGoogle('${title}');return false;">Search on Google</button>
                 </div>
             </div>
         `;
+
+
+
+        // let itemHtml = `
+        //     <div class="item-instance">
+        //         <span class="item-title">${title}</span>
+        //         <span class="item-likes">Likes: ${likes}</span>
+
+        //         <div class="section-imgsec">
+        //             <img src="${img}" class="item-img"/>                      
+        //             <span class="item-descript-bookmark right-origin">bookmark</span> 
+        //             ${bookmarkHtml}
+        //         </div>
+
+        //         <div class="container-footerbtns">
+        //             <button class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Go to Top</button>
+        //             <button class="btn-footerbtn" onclick="window.scrollTo(0, 0);">Recommend!</button>
+        //             <button class="btn-footerbtn" onclick="searchOnGoogle('${title}');return false;">Search on Google</button>
+        //         </div>
+        //     </div>
+        // `;
+
+
 
         $('.itembox').append(`${itemHtml}`);
     }
 }
 
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// 주의: 아래 like movie 는 임의의 영화에 좋아요가 표시됩니다.
-// 이 구현을 선택한 무비에 좋아요를 넣는 것으로 수정하셔야 됩니다. (함수 매개변수 및 함수 구현 모두)
-
-function likeMovie() {
+function toggleBookmark(id){
     $.ajax({
         type: "POST",
-        url: "/likes",
-        data: {},
+        url: "/bookmark",
+        data: {'targetID': id},
+        error: function(request, status, error){
+            alert("code: "+ request.status + "\n" 
+            + "message: " + request.responseText + "\n"
+            + "error: " + error);
+        },
         success: function (response) {
-            if (response['result'] == 'success') {
-                alert('like api :: success.')
-                showItems()
-            } else {
-                alert('like api :: failed.')
+            if (response['result'] != 'success') {
+                alert('failed to toggleBookmark')
+                return
             }
+            alert('toggleBookmark api :: success. ')
+            console.log("id : " + id + " , " + "isbookmarked : " + response['isBookmarked']);
+            showItems();
         }
     });
-}
-
-function bookmarkItem(flag){
-
 } 
             
 function changeFilter(targetMode){
@@ -114,7 +148,7 @@ function displayFilter(){
 function searchOnGoogle(inputString){
     $.ajax({
         type: "GET",
-        url: "/api/search",
+        url: "/search",
         data: {'title': inputString},
         success: function (response) {
             if (response['result'] != 'success') {
@@ -122,6 +156,23 @@ function searchOnGoogle(inputString){
                 return
             }
             console.log("+-- searchOnGoogle success");
+        }
+    });
+}
+
+// TO DO!!!!!!!!!!!!!!!!!!!!!
+function likeMovie() {
+    $.ajax({
+        type: "POST",
+        url: "/likes",
+        data: {},
+        success: function (response) {
+            if (response['result'] == 'success') {
+                alert('like api :: success.');
+                showItems();
+            } else {
+                alert('like api :: failed.');
+            }
         }
     });
 }
