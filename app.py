@@ -1,6 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-import requests
-from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
 from selenium import webdriver
@@ -11,7 +9,6 @@ from webdriver_manager.chrome import ChromeDriverManager
 import threading
 
 import time
-import base64
 
 app = Flask(__name__)
 
@@ -48,7 +45,6 @@ def home():
 # DB 내의 게임 목록 GET으로 가져오기
 @app.route('/items', methods=['GET'])
 def get_items():
-    # 요청한 sort방식 가져오기 .. 없다면 기본값으로 알파벳 순
     filterMode = request.args.get('filterMode', 'alphabet')
 
     if filterMode == 'alphabet':
@@ -62,10 +58,7 @@ def get_items():
     
     return jsonify({'result': 'success', 'item_list': items})
 
-# 좋아요 버튼으로 좋아요 개수 올리기. TODO!!!!!!!!!!!!
-@app.route('/likes', methods=['POST'])
-def like_items():
-    return jsonify({'result': 'success'})
+
 
 @app.route('/bookmark', methods=['POST'])
 def toggle_Bookmark():
@@ -76,6 +69,11 @@ def toggle_Bookmark():
     isBookmarked = db.items.find_one({'id':targetID}, {'bookmark':1})['bookmark']
     return jsonify({'result': 'success', 'isBookmarked': isBookmarked})
 
+@app.route('/likes', methods=['POST'])
+def like_items():
+    targetID = request.form.get('targetID', 'wrong')
+    db.items.update_one({'id':targetID}, {'$inc': {'likes' : 1}})    
+    return jsonify({'result': 'success'})
 
 @app.route("/search", methods=['GET'])
 def search_on_google():
@@ -93,7 +91,6 @@ def search_on_google_async(query):
     search_box.send_keys(Keys.RETURN)
     time.sleep(10)
     driver.quit()
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
